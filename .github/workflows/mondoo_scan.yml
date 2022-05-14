@@ -1,17 +1,19 @@
 name: mondoo-scan
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+  push:
+    branches: [master]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Dump env vars
-        run: env
+      - name: Scan with Mondoo
+        uses: mondoohq/actions@main
+        with:
+          service_account_credentials: ${{ secrets.MONDOO_CLIENT_ACCT }}
+          scan_type: docker_image
+          docker_image_name: ubuntu:22.04
