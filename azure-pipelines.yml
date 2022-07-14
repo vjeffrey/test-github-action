@@ -17,19 +17,19 @@ steps:
     dockerVersion: '17.09.0-ce'
 
 - script: |
-    docker build -t $(imageNamespace)/$(imageName) .
+    docker build -t test/img .
 displayName: 'Build Docker image'
 
 - script: |
     curl -sSL https://mondoo.io/download.sh | bash 
     echo ${MONDOO_CLIENT_ACCOUNT} | base64 -d > mondoo.json
-    ./mondoo scan -t docker://$(imageNamespace)/$(imageName) --config mondoo.json 
+    ./mondoo scan -t docker://test/img --config mondoo.json 
 displayName: 'Run mondoo vulnerability scan'
   env:
     MONDOO_CLIENT_ACCOUNT: $(MONDOO_CLIENT_ACCOUNT)
 
 - script: |
-    docker build -t $(imageNamespace)/$(imageName) .
+    docker build -t test/img .
 
 env:
     pswd: $(dockerPassword)
