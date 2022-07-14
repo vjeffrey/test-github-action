@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: centos:7
+    steps:
+      - setup_remote_docker
+      - checkout
+      # use a primary image that already has Docker (recommended)
+      # or install it during a build like we do here
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="18.09.3"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      - run:
+          name: Install Mondoo agent
+          command: |
+            curl -sSL https://mondoo.com/download.sh | bash
+            ./mondoo version
+
+      # - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: docker build -t yourorg/docker-image:0.1.$CIRCLE_BUILD_NUM .
+      - run: echo $MY_TEST
+      - run: echo $MONDOO_CLIENT_ACCOUNT
+      - run: echo $MONDOO_CLIENT_ACCOUNT | base64 -d > mondoo.json
+      - run: cat mondoo.json
+      - run: ./mondoo status --config mondoo.json
+      - run: ./mondoo scan -t docker://yourorg/docker-image:0.1.$CIRCLE_BUILD_NUM --config mondoo.json
