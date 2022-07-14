@@ -18,7 +18,6 @@ steps:
 
 - script: |
     docker build -t test/img .
-displayName: 'Build Docker image'
 
 - script: |
     curl -sSL https://mondoo.io/download.sh | bash 
