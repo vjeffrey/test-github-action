@@ -26,6 +26,3 @@ steps:
 
 - script: |
     docker build -t test/img .
-
-env:
-    pswd: $(dockerPassword)
