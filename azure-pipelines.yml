@@ -24,7 +24,6 @@ displayName: 'Build Docker image'
     curl -sSL https://mondoo.io/download.sh | bash 
     echo ${MONDOO_CLIENT_ACCOUNT} | base64 -d > mondoo.json
     ./mondoo scan -t docker://test/img --config mondoo.json 
-displayName: 'Run mondoo vulnerability scan'
   env:
     MONDOO_CLIENT_ACCOUNT: $(MONDOO_CLIENT_ACCOUNT)
 
