@@ -30,7 +30,6 @@ displayName: 'Run mondoo vulnerability scan'
 
 - script: |
     docker build -t $(imageNamespace)/$(imageName) .
-    docker login -u $(dockerUser) -p $(pswd)
-    docker push $(imageNamespace)/$(imageName)
+
 env:
     pswd: $(dockerPassword)
