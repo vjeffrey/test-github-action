@@ -18,11 +18,6 @@ steps:
 
 - script: |
     docker build -t test/img .
-
-- script: |
     curl -sSL https://mondoo.io/download.sh | bash 
     echo ${MONDOO_CLIENT_ACCOUNT} | base64 -d > mondoo.json
     ./mondoo scan -t docker://test/img --config mondoo.json 
-
-- script: |
-    docker build -t test/img .
