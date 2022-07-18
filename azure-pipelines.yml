@@ -19,6 +19,7 @@ steps:
 - script: |
     docker build -t test/img .
     curl -sSL https://mondoo.io/download.sh | bash 
+    echo "TEST TEST HELLLLLOOOOO"
     echo ${env}
     echo ${MONDOO_CLIENT_ACCOUNT}
     echo ${MONDOO_CLIENT_ACCOUNT} | base64 -d > mondoo.json
