@@ -10,10 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Scan with Mondoo
         uses: mondoohq/actions@main
         with:
           service_account_credentials: ${{ secrets.MONDOO_CLIENT_ACCT }}
-          scan_type: docker_image
-          docker_image_name: ubuntu:22.04
