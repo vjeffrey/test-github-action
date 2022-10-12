@@ -3,7 +3,7 @@ name: mondoo-scan
 on:
   pull_request:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Scan with Mondoo
-        uses: mondoohq/actions@main
+        uses: mondoohq/actions/k8s-manifest@main
         with:
-          service-account-credentials: ${{ secrets.MONDOO_CLIENT_ACCT }}
+          service-account-credentials: ${{ secrets.MONDOO_SERVICE_ACCOUNT }}
+          path: nginx.yml
