@@ -16,3 +16,6 @@ jobs:
         with:
           service-account-credentials: ${{ secrets.MONDOO_SERVICE_ACCOUNT }}
           image: ubuntu:22.04
+          log_level: debug
+          log-level: debug
+
