@@ -3,7 +3,7 @@ name: mondoo-scan
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build:
