@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Scan with Mondoo
-        uses: mondoohq/actions/k8s-manifest@main
+        uses: mondoohq/actions/docker-image@main
         with:
           service-account-credentials: ${{ secrets.MONDOO_SERVICE_ACCOUNT }}
-          path: nginx.yml
+          image: ubuntu:22.04
